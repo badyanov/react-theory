@@ -19,6 +19,12 @@ class App extends React.Component {
       })
   }
 
+  handleInput = (event) => {
+    this.setState({
+      pageTitle: event.target.value
+    })
+  }
+
   render() {
     const divStyle = {
       textAlign: "center",
@@ -30,11 +36,14 @@ class App extends React.Component {
       <div style={divStyle}>
         <h1>{this.state.pageTitle}</h1>
 
+        <input type="text" onChange={this.handleInput} />
+
         <button onClick={this.changeTitleHandler.bind(this, 'Changed!')}>Change title</button>
 
         {
-          cars.map((car) => {
+          cars.map((car, index) => {
             return (<Car 
+              key={index}
               name={car.name} 
               year={car.year} 
               //onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
