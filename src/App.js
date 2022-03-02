@@ -9,20 +9,26 @@ class App extends React.Component {
       { name: "Audi", year: 2021 },
       { name: "Mazda", year: 2011 },
     ],
-
-    pageTitle: 'React components'
+    pageTitle: '*',
+    showCars: false
   };
 
-  changeTitleHandler = (newTitle) => {
+  changeTitleHandler = (pageTitle) => {
     this.setState({
-        pageTitle: newTitle
-      })
+      pageTitle
+    })
   }
 
-  handleInput = (event) => {
+  toggleCarsHandler = () => {
+    let pageTitle = this.state.pageTitle;
+    if (this.state.showCars) {
+      pageTitle = '*';
+    }
+
     this.setState({
-      pageTitle: event.target.value
-    })
+        showCars: !this.state.showCars,
+        pageTitle: pageTitle
+      })
   }
 
   render() {
@@ -30,28 +36,27 @@ class App extends React.Component {
       textAlign: "center",
     };
 
-    const cars = this.state.cars;
+    let cars = null;
+    if (this.state.showCars) {
+      cars = this.state.cars.map((car, index) => {
+        return (<Car 
+          key={index}
+          name={car.name} 
+          year={car.year} 
+          onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
+          // onChangeTitle={() => this.changeTitleHandler(car.name)}
+        />)
+      })
+    }
 
     return (
       <div style={divStyle}>
-        <h1>{this.state.pageTitle}</h1>
+        <h1>React components</h1>
+        <h2>{this.state.pageTitle}</h2>
 
-        <input type="text" onChange={this.handleInput} />
-
-        <button onClick={this.changeTitleHandler.bind(this, 'Changed!')}>Change title</button>
-
-        {
-          cars.map((car, index) => {
-            return (<Car 
-              key={index}
-              name={car.name} 
-              year={car.year} 
-              //onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
-              onChangeTitle={() => this.changeTitleHandler(car.name)}
-            />)
-          })
-        }
-
+        <button onClick={this.toggleCarsHandler}>Show cars</button>
+        
+        { cars }
       </div>
     )
   }
