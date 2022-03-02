@@ -66,8 +66,13 @@ class App extends React.Component {
         <h2>{this.state.pageTitle}</h2>
 
         <button onClick={this.toggleCarsHandler}>Show cars</button>
-
-        { cars }
+        <div style={{
+          width: 400,
+          margin: 'auto',
+          paddingTop: '20px'
+        }}>
+          { cars }
+        </div>
       </div>
     )
   }
