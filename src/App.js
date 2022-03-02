@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import Car from "./Car/Car";
 import "./App.css";
 
@@ -13,9 +13,14 @@ class App extends React.Component {
     showCars: false
   };
 
-  changeTitleHandler = (pageTitle) => {
+  onChangeName(name, index) {
+    const car = this.state.cars[index];
+    car.name = name;
+    const cars = [...this.state.cars];
+    cars[index] = car;
+
     this.setState({
-      pageTitle
+      cars: cars
     })
   }
 
@@ -31,6 +36,12 @@ class App extends React.Component {
       })
   }
 
+  deleteHandler(index) {
+    const cars = [...this.state.cars];
+    cars.splice(index, 1);
+    this.setState({cars})
+  }
+
   render() {
     const divStyle = {
       textAlign: "center",
@@ -43,8 +54,8 @@ class App extends React.Component {
           key={index}
           name={car.name} 
           year={car.year} 
-          onChangeTitle={this.changeTitleHandler.bind(this, car.name)}
-          // onChangeTitle={() => this.changeTitleHandler(car.name)}
+          onDelete={this.deleteHandler.bind(this, index)}
+          onChangeName={(event) => this.onChangeName(event.target.value, index)}
         />)
       })
     }
@@ -55,7 +66,7 @@ class App extends React.Component {
         <h2>{this.state.pageTitle}</h2>
 
         <button onClick={this.toggleCarsHandler}>Show cars</button>
-        
+
         { cars }
       </div>
     )
