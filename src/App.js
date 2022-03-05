@@ -1,6 +1,7 @@
 import React from "react";
 import Car from "./Car/Car";
 import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
+import Counter from "./Counter/Counter";
 import "./App.css";
 
 class App extends React.Component {
@@ -84,12 +85,13 @@ class App extends React.Component {
 
     return (
       <div style={divStyle}>
-        {/* <h1>React components</h1> */}
-        {/* <h2>{this.state.pageTitle}</h2> */}
-
         <h1>{this.props.title}</h1>
 
-        <button onClick={this.toggleCarsHandler}>Show cars</button>
+        <Counter />
+        <br />
+
+        <button 
+        style={{marginTop: '20px'}} onClick={this.toggleCarsHandler}>Show cars</button>
         <div style={{
           width: 400,
           margin: 'auto',
