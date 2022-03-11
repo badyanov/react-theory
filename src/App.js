@@ -4,11 +4,14 @@ import ErrorBoundary from "./ErrorBoundary/ErrorBoundary";
 import Counter from "./Counter/Counter";
 import "./App.css";
 
+export const ClickedContext = React.createContext(false);
+
 class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      clicked: false,
       cars: [
         { name: "Ford", year: 2018 },
         { name: "Audi", year: 2021 },
@@ -76,12 +79,19 @@ class App extends React.Component {
       <div style={divStyle}>
         <h1>{this.props.title}</h1>
 
-        <Counter />
+        <ClickedContext.Provider value={this.state.clicked}>
+          <Counter />
+        </ClickedContext.Provider>
         <br />
 
         <button style={{ marginTop: "20px" }} onClick={this.toggleCarsHandler}>
           Show cars
         </button>
+
+        <button onClick={() => this.setState({ clicked: true })}>
+          Change clicked
+        </button>
+
         <div
           style={{
             width: 400,
