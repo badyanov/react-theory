@@ -59,14 +59,14 @@ class App extends React.Component {
     if (this.state.showCars) {
       cars = this.state.cars.map((car, index) => {
         return (
-        <ErrorBoundary key={index}>
-          <Car 
-            name={car.name} 
-            year={car.year} 
-            onDelete={this.deleteHandler.bind(this, index)}
-            onChangeName={(event) => this.onChangeName(event.target.value, index)}
-          />
-        </ErrorBoundary>
+          <ErrorBoundary key={index}>
+            <Car 
+              name={car.name} 
+              year={car.year} 
+              onDelete={this.deleteHandler.bind(this, index)}
+              onChangeName={(event) => this.onChangeName(event.target.value, index)}
+            />
+          </ErrorBoundary>
         )
       })
     }
