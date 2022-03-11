@@ -60,7 +60,8 @@ class App extends React.Component {
       cars = this.state.cars.map((car, index) => {
         return (
           <ErrorBoundary key={index}>
-            <Car 
+            <Car
+              index={index} 
               name={car.name} 
               year={car.year} 
               onDelete={this.deleteHandler.bind(this, index)}
