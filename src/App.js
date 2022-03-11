@@ -7,8 +7,6 @@ import "./App.css";
 class App extends React.Component {
 
   constructor(props) {
-    console.log('App constructor');
-
     super(props);
 
     this.state = {
@@ -50,17 +48,8 @@ class App extends React.Component {
     cars.splice(index, 1);
     this.setState({cars})
   }
-
-  // componentWillMount() {
-  //   console.log('App componentWillMount');
-  // }
-
-  componentDidMount() {
-    console.log('App componentDidMount')
-  }
   
   render() {
-    console.log('App render');
 
     const divStyle = {
       textAlign: "center",
@@ -90,8 +79,7 @@ class App extends React.Component {
         <Counter />
         <br />
 
-        <button 
-        style={{marginTop: '20px'}} onClick={this.toggleCarsHandler}>Show cars</button>
+        <button style={{marginTop: '20px'}} onClick={this.toggleCarsHandler}>Show cars</button>
         <div style={{
           width: 400,
           margin: 'auto',

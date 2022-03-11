@@ -1,46 +1,10 @@
 import React from "react";
-import './Car.css'
+import classes from './Car.css'
+import withClass from "../hoc/withClass";
 
 class Car extends React.Component {
 
-  // UNSAFE_componentWillReceiveProps(nextProps) {
-  //   console.log('Car UNSAFE_componentWillReceiveProps', nextProps);
-  // }
-
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log('Car shouldComponentUpdate', nextProps, nextState);
-    return nextProps.name.trim() !== this.props.name.trim();
-  }
-
-  // componentWillUpdate(nextProps, nextState) {
-  //   console.log('Car componentWillUpdate', nextProps, nextState);
-  // }
-
-  static getDerivedStateFromProps(nextProps, prevState) {
-    console.log('Car getDerivedStateFromProps', nextProps, prevState);
-
-    return prevState;
-  }
-
-  componentDidUpdate() {
-    console.log('Car componentDidUpdate');
-  }
-
-  getSnapshotBeforeUpdate() {
-    console.log('Car getSnapshotBeforeUpdate');
-  }
-
-  componentWillUnmount() {
-    console.log('Car componentWillUnmount');
-  }
-
-  render() {
-    console.log('Car render');
-
-    // if (Math.random() > 0.7) {
-    //   throw new Error('Car random failed');
-    // }
-
+   render() {
     const inputClasses = ['input'];
    
     if (this.props.name !== '') {
@@ -54,7 +18,7 @@ class Car extends React.Component {
     }
   
     return (
-    <div className="Car">
+    <React.Fragment>
       <h3>Car name: {this.props.name}</h3>
       <p>Year: {this.props.year}</p>
       <input 
@@ -63,8 +27,8 @@ class Car extends React.Component {
         onChange={this.props.onChangeName} 
         value={this.props.name}/>
       <button onClick={this.props.onDelete}>Delete</button>
-    </div>
+    </React.Fragment>
   )} 
 }
 
-export default Car;
+export default withClass(Car, classes.Car);
